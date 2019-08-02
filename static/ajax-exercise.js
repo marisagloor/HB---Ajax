@@ -2,13 +2,24 @@
 
 
 // PART 1: SHOW A FORTUNE
+function updateFortune(response) {
+  console.log(`Result from the server ${response}`);
+  const fortune = response;
+  $('#fortune-text').html(fortune);
+  console.log('Reached end of the function');
+  }
 
 function showFortune(evt) {
-
-    // TODO: get the fortune and show it in the #fortune-text div
+  $.get('/fortune', updateFortune);
+  console.log('Get request sent to server');
 }
-
 $('#get-fortune-button').on('click', showFortune);
+  
+  // TODO: get the fortune and show it in the #fortune-text div
+
+
+
+
 
 
 
