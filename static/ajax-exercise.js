@@ -2,9 +2,8 @@
 
 
 // PART 1: SHOW A FORTUNE
-function updateFortune(response) {
-  console.log(`Result from the server ${response}`);
-  const fortune = response;
+function updateFortune(fortune) {
+  console.log(`Result from the server ${fortune}`);
   $('#fortune-text').html(fortune);
   console.log('Reached end of the function');
   }
@@ -26,15 +25,21 @@ $('#get-fortune-button').on('click', showFortune);
 
 
 // PART 2: SHOW WEATHER
-
+function updateWeather(weather) {
+  console.log(`Result from the server ${weather.forecast}`);
+  $('#weather-info').html(weather.forecast);
+  console.log('Reached end of the function');
+}
 function showWeather(evt) {
-    evt.preventDefault();
+  evt.preventDefault();
 
-    let url = "/weather.json";
-    let formData = {"zipcode": $("#zipcode-field").val()};
+  let url = "/weather.json";
+  let formData = {"zipcode": $("#zipcode-field").val()};
 
+  $.get(url, formData, updateWeather);
+  console.log('Request weather data');
 
-    // TODO: request weather with that URL and show the forecast in #weather-info
+   // TODO: request weather with that URL and show the forecast in #weather-info
 }
 
 $("#weather-form").on('submit', showWeather);
